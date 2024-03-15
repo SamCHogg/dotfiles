@@ -1,0 +1,8 @@
+#!/bin/bash
+{{ if (eq .chezmoi.os "darwin") -}}
+
+{{ if (eq .machine "work-laptop") -}}
+brew bundle --file={{ joinPath .chezmoi.sourceDir "work.Brewfile" | quote }}
+{{ end -}}
+
+{{ end -}}
