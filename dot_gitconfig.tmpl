@@ -1,19 +1,19 @@
 [user]
-	name = SamCHogg
+  name = SamCHogg
   {{- if eq .machine "work-laptop" }}
-	email = sam.hogg@arm.com
+  email = sam.hogg@arm.com
   {{- else }}
   email = github@samchogg.com
   {{- end }}
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOEPhxefWSm/bch/XEktb6lEtcpJscbe9duuiN2JQTnF
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOEPhxefWSm/bch/XEktb6lEtcpJscbe9duuiN2JQTnF
 [core]
-	excludesFile = ~/.gitignore
-	autocrlf = input
+  excludesFile = ~/.gitignore
+  autocrlf = input
 [url "git@github.com:"]
-	insteadOf = https://github.com/
+  insteadOf = https://github.com/
 [commit]
-	gpgsign = true
+  gpgsign = true
 [gpg]
-	format = ssh
+  format = ssh
 [gpg "ssh"]
-	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
