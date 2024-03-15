@@ -1,6 +1,7 @@
 [user]
 	name = SamCHogg
 	email = sam.hogg@arm.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOEPhxefWSm/bch/XEktb6lEtcpJscbe9duuiN2JQTnF
 [core]
 	excludesFile = ~/.gitignore
 	autocrlf = input
@@ -8,3 +9,7 @@
 	insteadOf = https://github.com/
 [commit]
 	gpgsign = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
