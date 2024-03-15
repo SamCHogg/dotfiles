@@ -17,3 +17,9 @@ Apply dotfiles:
 chezmoi init --apply https://github.com/SamCHogg/dotfiles.git
 ```
 
+## Update
+
+```
+chezmoi update
+```
+
