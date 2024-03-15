@@ -1,0 +1,10 @@
+[user]
+	name = SamCHogg
+	email = sam.hogg@arm.com
+[core]
+	excludesFile = ~/.gitignore
+	autocrlf = input
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[commit]
+	gpgsign = true
