@@ -1,6 +1,10 @@
 [user]
 	name = SamCHogg
+        {{- if eq .chezmoi.hostname "FVFG51L5Q05N" }}
 	email = sam.hogg@arm.com
+        {{- else }}
+        email = github@samchogg.com
+        {{- end }}
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOEPhxefWSm/bch/XEktb6lEtcpJscbe9duuiN2JQTnF
 [core]
 	excludesFile = ~/.gitignore
