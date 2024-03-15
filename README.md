@@ -12,6 +12,27 @@ Install chezmoi:
 brew install chezmoi
 ```
 
+Copy chezmoi config:
+```
+cat > ~/.config/chezmoi/chezmoi.jsonc << EOF
+{
+  "data": {
+    // Update this per machine
+    "machine": "work-laptop"
+  },
+  "merge": {
+    "command": "nvim",
+    "args": [
+      "-d",
+      "{{ .Destination }}",
+      "{{ .Source }}",
+      "{{ .Target }}"
+    ]
+  }
+}
+EOF
+```
+
 Apply dotfiles:
 ```
 chezmoi init --apply https://github.com/SamCHogg/dotfiles.git
