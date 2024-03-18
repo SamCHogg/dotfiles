@@ -3,7 +3,7 @@
 
 {{ if (eq .machine "work-laptop") -}}
 brew bundle --file={{ joinPath .chezmoi.sourceDir "work.Brewfile" | quote }}
-{{ else if -}}
+{{ else -}}
 brew bundle --file={{ joinPath .chezmoi.sourceDir "personal.Brewfile" | quote }}
 {{ end -}}
 
