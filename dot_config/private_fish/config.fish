@@ -8,7 +8,7 @@ fish_config theme choose "Catppuccin Mocha"
 set -x HOMEBREW_NO_AUTO_UPDATE 1
 
 # Golang config
-if which go
+if type -q go
   set -x GOPATH (go env GOPATH)
   set -x PATH $PATH (go env GOPATH)/bin
   set -x GO111MODULE on
@@ -29,8 +29,13 @@ set -x QA_ARTIFACTORY_TOKEN $(security find-generic-password -a "$USER" -s "QA_A
 set -x PROD_ARTIFACTORY_TOKEN $(security find-generic-password -a "$USER" -s "PROD_ARTIFACTORY_TOKEN" -w)
 
 # AWS
-if which aws
+if type -q aws
   set -x AWS_DEFAULT_PROFILE otg-qa
+  
+  abbr -a -- awssso 'aws sso login --sso-session arm'
+  abbr -a -- asso 'aws sso login --sso-session arm'
+  abbr -a -- awswhoami 'aws sts get-caller-identity'
+  
   # Enable AWS CLI autocompletion: github.com/aws/aws-cli/issues/1079
   complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
 end
@@ -40,7 +45,7 @@ end
 set -x DOCKER_BUILDKIT 1
 set -x COMPOSE_DOCKER_CLI_BUILD 1
 
-if which kubectl
+if type -q kubectl
   kubectl completion fish | source
 end
 
@@ -49,12 +54,12 @@ source /opt/homebrew/opt/asdf/libexec/asdf.fish
 set -x ASDF_GOLANG_MOD_VERSION_ENABLED true
 
 # kubeswitch
-if which switcher
+if type -q switcher
   switcher init fish | source
 end
 
 # zoxide
-if which zoxide
+if type -q zoxide
   zoxide init fish | source
 end
 
@@ -62,10 +67,8 @@ end
 test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
 
 # abbr
-abbr -a -- awssso 'aws sso login --sso-session arm'
 abbr -a -- tf terraform
 abbr -a -- goland 'open -a goland'
-abbr -a -- awswhoami 'aws sts get-caller-identity'
 abbr -a -- kcg 'kubectl get'
 abbr -a -- kcgn 'kubectl get nodes --label-columns=node.kubernetes.io/role --label-columns node.kubernetes.io/gvisor --label-columns topology.kubernetes.io/zone'
 abbr -a -- reload 'source ~/.config/fish/config.fish'
@@ -78,7 +81,6 @@ abbr -a -- ks kubeswitch
 abbr -a -- textmate 'open -a textmate'
 abbr -a -- kc kubectl
 abbr -a -- kcrun 'kubectl run ubuntu-s -it --wait --attach --rm=true --restart=Never --image=ubuntu:20.04 -- bash'
-abbr -a -- asso 'aws sso login --sso-session arm'
 
 
 
