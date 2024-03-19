@@ -49,8 +49,8 @@ if type -q kubectl
 end
 
 # asdf
-source /opt/homebrew/opt/asdf/libexec/asdf.fish
 set -x ASDF_GOLANG_MOD_VERSION_ENABLED true
+source /opt/homebrew/opt/asdf/libexec/asdf.fish
 
 # kubeswitch
 if type -q switcher

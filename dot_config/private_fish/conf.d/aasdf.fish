@@ -1,0 +1,1 @@
+set -gx ASDF_GOLANG_MOD_VERSION_ENABLED true
