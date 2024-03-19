@@ -15,18 +15,17 @@ if type -q go
   go env -w GOPRIVATE=github.com/Arm-Debug
 end
 
-# Tokens
-# security add-generic-password -a "$USER" -s 'name_of_your_key' -w 'passphrase'
-set -x GITHUB_TOKEN $(security find-generic-password -a "$USER" -s "GITHUB_TOKEN" -w)
-set -x CIRCLECI_TOKEN $(security find-generic-password -a "$USER" -s "CIRCLECI_TOKEN" -w)
+# GitHub
+set -x GITHUB_TOKEN "op://Personal/jamwb7mfjgrznc4xadxv6y5c5y/PATs/Work Laptop 3"
 
+# CircleCI
+set -x CIRCLECI_TOKEN "op://Personal/CircleCI/PATs/PAT"
 
-# Artifactory credentials
-set -x ARTIFACTORY_HOST "https://artifactory.core.test.mbed.com"
-set -x ARTIFACTORY_USER "sam.hogg%40arm.com"
-set -x ARTIFACTORY_PASSWORD $(security find-generic-password -a "$USER" -s "ARTIFACTORY_PASSWORD" -w)
-set -x QA_ARTIFACTORY_TOKEN $(security find-generic-password -a "$USER" -s "QA_ARTIFACTORY_TOKEN" -w)
-set -x PROD_ARTIFACTORY_TOKEN $(security find-generic-password -a "$USER" -s "PROD_ARTIFACTORY_TOKEN" -w)
+# Artifactory
+set -x ARTIFACTORY_QA_HOST "op://Work/Artifactory QA/url"
+set -x ARTIFACTORY_QA_TOKEN "op://Work/Artifactory QA/PATs/PAT"
+set -x ARTIFACTORY_PROD_HOST "op://Work/Artifactory PROD/url"
+set -x ARTIFACTORY_PROD_TOKEN "op://Work/Artifactory PROD/PATs/PAT"
 
 # AWS
 if type -q aws
