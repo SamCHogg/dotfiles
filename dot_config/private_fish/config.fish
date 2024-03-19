@@ -8,11 +8,12 @@ fish_config theme choose "Catppuccin Mocha"
 set -x HOMEBREW_NO_AUTO_UPDATE 1
 
 # Golang config
-set -x GOPATH (go env GOPATH)
-set -x PATH $PATH (go env GOPATH)/bin
-set -x GO111MODULE on
-go env -w GOPRIVATE=github.com/Arm-Debug
-
+if which go
+  set -x GOPATH (go env GOPATH)
+  set -x PATH $PATH (go env GOPATH)/bin
+  set -x GO111MODULE on
+  go env -w GOPRIVATE=github.com/Arm-Debug
+end
 
 # Tokens
 # security add-generic-password -a "$USER" -s 'name_of_your_key' -w 'passphrase'
@@ -28,28 +29,34 @@ set -x QA_ARTIFACTORY_TOKEN $(security find-generic-password -a "$USER" -s "QA_A
 set -x PROD_ARTIFACTORY_TOKEN $(security find-generic-password -a "$USER" -s "PROD_ARTIFACTORY_TOKEN" -w)
 
 # AWS
-set -x AWS_DEFAULT_PROFILE otg-qa
-# Enable AWS CLI autocompletion: github.com/aws/aws-cli/issues/1079
-complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
+if which aws
+  set -x AWS_DEFAULT_PROFILE otg-qa
+  # Enable AWS CLI autocompletion: github.com/aws/aws-cli/issues/1079
+  complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
+end
 
 
 # Enable BuildKit everywhere
 set -x DOCKER_BUILDKIT 1
 set -x COMPOSE_DOCKER_CLI_BUILD 1
 
-
-kubectl completion fish | source
-
+if which kubectl
+  kubectl completion fish | source
+end
 
 # asdf
 source /opt/homebrew/opt/asdf/libexec/asdf.fish
 set -x ASDF_GOLANG_MOD_VERSION_ENABLED true
 
 # kubeswitch
-switcher init fish | source
+if which switcher
+  switcher init fish | source
+end
 
 # zoxide
-zoxide init fish | source
+if which zoxide
+  zoxide init fish | source
+end
 
 # iterm2
 test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
