@@ -44,3 +44,7 @@ chezmoi init --apply https://github.com/SamCHogg/dotfiles.git
 chezmoi update
 ```
 
+## Making Changes
+
+https://www.chezmoi.io/user-guide/frequently-asked-questions/usage/#once-ive-made-a-change-to-the-source-directory-how-do-i-commit-it
+
