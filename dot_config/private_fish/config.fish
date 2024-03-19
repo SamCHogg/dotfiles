@@ -4,6 +4,9 @@ fish_add_path ~/.local/bin
 fish_add_path ~/.krew/bin
 
 fish_config theme choose "Catppuccin Mocha"
+set -g fish_greeting
+set -g fish_key_bindings fish_default_key_bindings
+
 
 set -x HOMEBREW_NO_AUTO_UPDATE 1
 
@@ -47,10 +50,6 @@ set -x COMPOSE_DOCKER_CLI_BUILD 1
 if type -q kubectl
   kubectl completion fish | source
 end
-
-# asdf
-set -x ASDF_GOLANG_MOD_VERSION_ENABLED true
-source /opt/homebrew/opt/asdf/libexec/asdf.fish
 
 # kubeswitch
 if type -q switcher
