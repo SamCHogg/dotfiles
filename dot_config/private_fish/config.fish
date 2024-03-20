@@ -12,10 +12,10 @@ set -x HOMEBREW_NO_AUTO_UPDATE 1
 
 # Golang config
 if type -q go
-  set -x GOPATH (go env GOPATH)
-  set -x PATH $PATH (go env GOPATH)/bin
-  set -x GO111MODULE on
-  go env -w GOPRIVATE=github.com/Arm-Debug
+    set -x GOPATH ~/go/bin
+    fish_add_path ~/go/bin
+    set -x GO111MODULE on
+    set -x GOPRIVATE github.com/Arm-Debug
 end
 
 # GitHub
@@ -31,15 +31,15 @@ set -x ARTIFACTORY_PROD_HOST "op://Work/Artifactory PROD/url"
 set -x ARTIFACTORY_PROD_TOKEN "op://Work/Artifactory PROD/PATs/PAT"
 
 # AWS
-if type -q aws
-  set -x AWS_DEFAULT_PROFILE otg-qa
-  
-  abbr -a -- awssso 'aws sso login --sso-session arm'
-  abbr -a -- asso 'aws sso login --sso-session arm'
-  abbr -a -- awswhoami 'aws sts get-caller-identity'
-  
-  # Enable AWS CLI autocompletion: github.com/aws/aws-cli/issues/1079
-  complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
+if type -q aws and false
+    set -x AWS_DEFAULT_PROFILE otg-qa
+
+    abbr -a -- awssso 'aws sso login --sso-session arm'
+    abbr -a -- asso 'aws sso login --sso-session arm'
+    abbr -a -- awswhoami 'aws sts get-caller-identity'
+
+    # Enable AWS CLI autocompletion: github.com/aws/aws-cli/issues/1079
+    complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
 end
 
 
@@ -47,22 +47,18 @@ end
 set -x DOCKER_BUILDKIT 1
 set -x COMPOSE_DOCKER_CLI_BUILD 1
 
-if type -q kubectl
-  kubectl completion fish | source
-end
-
 # kubeswitch
-if type -q switcher
-  switcher init fish | source
-end
+#if type -q switcher and false
+#    switcher init fish | source
+#end
 
 # zoxide
-if type -q zoxide
-  zoxide init fish | source
+if type -q zoxide and false
+    zoxide init fish | source
 end
 
 # iterm2
-test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
+#test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
 
 # abbr
 abbr -a -- tf terraform
@@ -79,6 +75,3 @@ abbr -a -- ks kubeswitch
 abbr -a -- textmate 'open -a textmate'
 abbr -a -- kc kubectl
 abbr -a -- kcrun 'kubectl run ubuntu-s -it --wait --attach --rm=true --restart=Never --image=ubuntu:20.04 -- bash'
-
-
-
