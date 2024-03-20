@@ -31,7 +31,7 @@ set -x ARTIFACTORY_PROD_HOST "op://Work/Artifactory PROD/url"
 set -x ARTIFACTORY_PROD_TOKEN "op://Work/Artifactory PROD/PATs/PAT"
 
 # AWS
-if type -q aws and false
+if type -q aws
     set -x AWS_DEFAULT_PROFILE otg-qa
 
     abbr -a -- awssso 'aws sso login --sso-session arm'
@@ -55,6 +55,9 @@ set -x COMPOSE_DOCKER_CLI_BUILD 1
 # zoxide
 if type -q zoxide and false
     zoxide init fish | source
+    if status is-interactive
+        abbr -a -- cd z
+    end
 end
 
 # iterm2
