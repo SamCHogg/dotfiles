@@ -42,39 +42,50 @@ if type -q aws
     complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
 end
 
-
-# Enable BuildKit everywhere
-set -x DOCKER_BUILDKIT 1
-set -x COMPOSE_DOCKER_CLI_BUILD 1
-
 # kubeswitch
 #if type -q switcher and false
 #    switcher init fish | source
 #end
 
 # zoxide
-if type -q zoxide and false
+if type -q zoxide
     zoxide init fish | source
     if status is-interactive
         abbr -a -- cd z
     end
 end
 
+
+if type -q kubectl
+    set -x KUBE_EDITOR nvim
+    abbr -a -- kcg 'kubectl get'
+    abbr -a -- kcgn 'kubectl get nodes --label-columns=node.kubernetes.io/role --label-columns node.kubernetes.io/gvisor --label-columns topology.kubernetes.io/zone'
+    abbr -a -- kcl 'kubectl logs'
+    abbr -a -- kcd 'kubectl describe'
+    abbr -a -- kc kubectl
+    abbr -a -- kcrun 'kubectl run ubuntu-s -it --wait --attach --rm=true --restart=Never --image=ubuntu:20.04 -- bash'
+end
+
+if type -q terraform
+    abbr -a -- tf terraform
+end
+
+if type -q docker
+    # Enable BuildKit everywhere
+    set -x DOCKER_BUILDKIT 1
+end
+
+if type -q docker-compose
+    # Enable BuildKit everywhere
+    set -x COMPOSE_DOCKER_CLI_BUILD 1
+    abbr -a -- dc docker-compose
+end
+
+
 # iterm2
 #test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
 
 # abbr
-abbr -a -- tf terraform
 abbr -a -- goland 'open -a goland'
-abbr -a -- kcg 'kubectl get'
-abbr -a -- kcgn 'kubectl get nodes --label-columns=node.kubernetes.io/role --label-columns node.kubernetes.io/gvisor --label-columns topology.kubernetes.io/zone'
 abbr -a -- reload 'source ~/.config/fish/config.fish'
-abbr -a -- kcl 'kubectl logs'
-abbr -a -- ksn 'kubeswitch ns'
-abbr -a -- dc docker-compose
-abbr -a -- kcd 'kubectl describe'
-abbr -a -- tree 'exa -T'
-abbr -a -- ks kubeswitch
 abbr -a -- textmate 'open -a textmate'
-abbr -a -- kc kubectl
-abbr -a -- kcrun 'kubectl run ubuntu-s -it --wait --attach --rm=true --restart=Never --image=ubuntu:20.04 -- bash'
