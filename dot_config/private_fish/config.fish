@@ -3,6 +3,15 @@ fish_add_path /opt/homebrew/bin
 fish_add_path ~/.local/bin
 fish_add_path ~/.krew/bin
 
+# ASDF
+fish_add_path "$ASDF_DIR/bin"
+fish_add_path "$HOME/.asdf/shims"
+
+if status --is-interactive && type -q asdf
+    source (brew --prefix asdf)/libexec/asdf.fish
+end
+
+
 fish_config theme choose "Catppuccin Mocha"
 set -g fish_greeting
 set -g fish_key_bindings fish_default_key_bindings
