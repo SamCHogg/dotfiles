@@ -59,6 +59,7 @@ config.color_schemes = {
 
 config.color_scheme = "Myppuccin"
 config.use_fancy_tab_bar = false
+config.tab_max_width = 32
 
 config.scrollback_lines = 5000
 config.adjust_window_size_when_changing_font_size = false
@@ -68,6 +69,7 @@ config.font = wezterm.font("JetBrains Mono")
 config.font_size = 14
 
 -- Keybinds
+config.send_composed_key_when_left_alt_is_pressed = true
 config.leader = { key = "Space", mods = "CTRL" }
 config.keys = {
 	{
