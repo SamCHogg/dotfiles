@@ -39,6 +39,9 @@ set -x ARTIFACTORY_QA_TOKEN "op://Work/Artifactory QA/PATs/PAT"
 set -x ARTIFACTORY_PROD_HOST "op://Work/Artifactory PROD/url"
 set -x ARTIFACTORY_PROD_TOKEN "op://Work/Artifactory PROD/PATs/PAT"
 
+# DockerHub
+set -x DOCKERHUB_TOKEN "op://Work/Docker/PAT"
+
 # AWS
 if type -q aws
     set -x AWS_DEFAULT_PROFILE otg-qa
