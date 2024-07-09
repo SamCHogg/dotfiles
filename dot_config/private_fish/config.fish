@@ -21,6 +21,7 @@ set -x HOMEBREW_NO_AUTO_UPDATE 1
 
 # Golang config
 if type -q go
+    set -x GOPATH ~/go/
     fish_add_path ~/go/bin
     set -x GO111MODULE on
     set -x GOPRIVATE github.com/Arm-Debug
